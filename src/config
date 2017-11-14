@@ -1,0 +1,23 @@
+link bandwidth app
+java BandwidthUI -config config-bui 
+orchestrator url
+http://127.0.0.1:6666
+task config
+/Users/qiao/Downloads/assignment3-submissions/UnicornUI/src/configFiles/taskInput.json
+path query
+/Users/qiao/Downloads/assignment3-submissions/UnicornUI/src/pq-monitor
+/Users/qiao/Downloads/assignment3-submissions/UnicornUI/src/pq-result
+resource query
+/Users/qiao/Downloads/assignment3-submissions/UnicornUI/src/rq-monitor
+/Users/qiao/Downloads/assignment3-submissions/UnicornUI/src/rq-result
+smpc
+/Users/qiao/Downloads/assignment3-submissions/UnicornUI/src/smpc-monitor
+/Users/qiao/Downloads/assignment3-submissions/UnicornUI/src/smpc-result
+schedule
+/Users/qiao/Downloads/assignment3-submissions/UnicornUI/src/schedule-monitor
+/Users/qiao/Downloads/assignment3-submissions/UnicornUI/src/schedule-result
+
+
+
+
+
