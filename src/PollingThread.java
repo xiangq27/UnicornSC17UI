@@ -14,7 +14,8 @@ public class PollingThread extends Thread {
     //private final static int UPDATED = 2;
 
     private int taskID;
-    private String pollURL;
+    // private String pollURL;
+    private String type;
     private String pollFile;
     private String getURL;
     private String getDir;
@@ -29,12 +30,13 @@ public class PollingThread extends Thread {
     private long timeStamp = 0;
     //private long currentTimeStamp = 0;
 
-    public PollingThread(int taskID, String pollURL, String pollFile,
+    public PollingThread(int taskID, String type, String pollFile,
                          String getURL, String getDir,
                          String display) {
         this.taskID = taskID;
-        this.pollURL = pollURL;
+        // this.pollURL = pollURL;
         this.pollFile = pollFile;
+        this.type = type;
         this.getURL = getURL;
         this.getDir = getDir;
         this.display = display;
@@ -42,11 +44,11 @@ public class PollingThread extends Thread {
 
     @Override
     public void run() {
-        //String command = "python getStatus "+this.pollURL+Integer.toString(this.taskID);
+        String[] command = new String[]{"bash", "url_parser.py", "--url", this.getURL + Integer.toString(this.taskID), "--type", this.type, "--output", this.pollFile};
         while (true) { // repeat until gets killed
             try {
-                //Process process = Runtime.getRuntime().exec(command);
-                //process.waitFor();
+                Process process = Runtime.getRuntime().exec(command);
+                process.waitFor();
 
                 FileReader f = new FileReader(pollFile);
                 BufferedReader br = new BufferedReader(f);
