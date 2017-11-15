@@ -42,8 +42,10 @@ public class UnicornGUI extends JPanel {
     //TODO: schedule is not defined yet
     private final static String[] getRoute = {"/task_lookup/",
                                             "/resource_lookup/",
-                                            "/task_lookup/",
+                                            "/resource_lookup/",
                                             "/schedule_lookup/"};
+    private final static String[] getRouteType = {"task", "resource", "smpc", "scheduling"};
+
     //private final static String[] type = {"task", "resource", "task", "scheduling"};
     private final static String[] displayHead = {"Path query",
                                                 "Resource query",
@@ -320,19 +322,37 @@ public class UnicornGUI extends JPanel {
     }
 
     private static void getPathQueryResult(String[] fileNames) {
-        for (int i=0; i < fileNames.length; i++) {
-            try {
-                String content = new Scanner(new File(fileNames[i])).useDelimiter("\\Z").next();
-                doc.insertString(doc.getLength(), content, doc.getStyle("regular"));
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
+        String command = "python3 url_parser.py --url="+orchestratorURL+getRoute[0]
+                +Integer.toString(taskID)+" --type "+getRouteType[0]
+                +" --output ./" + getRouteType[0]+"-result";
+        try {
+            Process process = Runtime.getRuntime().exec(command);
+            process.waitFor();
+
+            String content = new Scanner(new File("./"+getRouteType[0]+"-result"))
+                                .useDelimiter("\\Z").next();
+            doc.insertString(doc.getLength(), content, doc.getStyle("regular"));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     private static void getResourceQueryResult(String[] fileNames) {
+        String command = "python3 url_parser.py --url="+orchestratorURL+getRoute[1]
+                +Integer.toString(taskID)+" --type "+getRouteType[1]
+                +" --output ./" + getRouteType[1]+"-result";
+        try {
+            Process process = Runtime.getRuntime().exec(command);
+            process.waitFor();
 
+            String content = new Scanner(new File("./"+getRouteType[1]+"-result"))
+                    .useDelimiter("\\Z").next();
+            doc.insertString(doc.getLength(), content, doc.getStyle("regular"));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private static void getSMPCResult(String[] fileNames) {
@@ -340,7 +360,20 @@ public class UnicornGUI extends JPanel {
     }
 
     private static void getSchedulingResult(String[] fileNames) {
+        String command = "python3 url_parser.py --url="+orchestratorURL+getRoute[3]
+                +Integer.toString(taskID)+" --type "+getRouteType[3]
+                +" --output ./" + getRouteType[3]+"-result";
+        try {
+            Process process = Runtime.getRuntime().exec(command);
+            process.waitFor();
 
+            String content = new Scanner(new File("./"+getRouteType[3]+"-result"))
+                    .useDelimiter("\\Z").next();
+            doc.insertString(doc.getLength(), content, doc.getStyle("regular"));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private static void startLinkBWProgam() {
