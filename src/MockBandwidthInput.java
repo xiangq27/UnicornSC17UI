@@ -33,12 +33,15 @@ public class MockBandwidthInput {
 
                 int randomNum = Integer.parseInt(args[3])
                                 + (int)(Math.random() * (Integer.parseInt(args[5])-Integer.parseInt(args[3])));
-
+                int randomNum2 = Integer.parseInt(args[3])
+                        + (int)(Math.random() * (Integer.parseInt(args[5])-Integer.parseInt(args[3])));
+                int randomNum3 = Integer.parseInt(args[3])
+                        + (int)(Math.random() * (Integer.parseInt(args[5])-Integer.parseInt(args[3])));
                 System.out.println(Integer.toString(randomNum));
 
                 b.write(Integer.toString(randomNum));
-                c.write(Integer.toString(randomNum/2));
-                d.write(Integer.toString(randomNum/3));
+                c.write(Integer.toString(randomNum2));
+                d.write(Integer.toString(randomNum3));
                 b.close();
                 c.close();
                 d.close();
