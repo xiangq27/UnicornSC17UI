@@ -44,7 +44,8 @@ public class PollingThread extends Thread {
 
     @Override
     public void run() {
-        String command = "./getStatus.sh "+this.pollURL+" "+Integer.toString(this.taskID);
+        String command = "./getStatus.sh "+this.pollURL+" "+
+                Integer.toString(this.taskID)+" "+this.pollFile;
         //String[] command = new String[]{"bash", "url_parser.py", "--url", this.getURL + Integer.toString(this.taskID), "--type", this.type, "--output", this.pollFile};
         while (true) { // repeat until gets killed
             try {

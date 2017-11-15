@@ -15,11 +15,12 @@ from pprint import pprint
 if __name__ == "__main__":
     '''Parse the test parameters'''
     parser = argparse.ArgumentParser(description='Parse the json result.')
-    parser.add_argument('-file', type=str)
+    parser.add_argument('-input', type=str)
+    parser.add_argument('-output', type=str)
     args = parser.parse_args()
 
-    data=json.load(open(args.file+'.json', 'r'))
-    f = open(args.file, 'w')
+    data=json.load(open(args.input, 'r'))
+    f = open(args.output, 'w')
 
     if data['complete']==True:
         f.write("1\n")

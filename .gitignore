@@ -1,1 +1,6 @@
 *.class
+out/
+.iml
+.idea
+
+
