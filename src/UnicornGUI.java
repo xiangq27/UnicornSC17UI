@@ -276,8 +276,8 @@ public class UnicornGUI extends JPanel {
                         "-H 'Content-type: application/json' -d '[" + jsonContent + "]'";
 
 
-                //Process process = Runtime.getRuntime().exec(command);
-                //process.waitFor();
+                Process process = Runtime.getRuntime().exec(command);
+                process.waitFor();
 
 
                 System.out.println(taskInput);
