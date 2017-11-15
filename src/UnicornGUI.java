@@ -272,15 +272,15 @@ public class UnicornGUI extends JPanel {
 
                 String jsonContent = new Scanner(new File(taskInput)).useDelimiter("\\Z").next();
 
-                String command = "curl -v "+orchestratorURL+"/task " +
-                        "-H 'Content-type: application/json' -d '[" + jsonContent + "]'";
+                String[] command = new String[]{"curl", "-v", orchestratorURL + "/task",
+                        "-H", "Content-type: application/json", "-d", "[" + jsonContent + "]"};
 
-
+                //System.out.println(command);
                 Process process = Runtime.getRuntime().exec(command);
                 process.waitFor();
 
 
-                System.out.println(taskInput);
+                //System.out.println(taskInput);
                 String parseTaskCom = "python parseTaskJson.py -input "+taskInput+" -output ./task";
                 Process parseTaskpro = Runtime.getRuntime().exec(parseTaskCom);
                 parseTaskpro.waitFor();
@@ -303,6 +303,13 @@ public class UnicornGUI extends JPanel {
                     pollingPool.add(pollingThread);
                     pollingThread.start();
                 }
+
+
+                Process p = Runtime.getRuntime().exec("./getBW.sh");
+                //p.waitFor();
+
+
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -341,9 +348,9 @@ public class UnicornGUI extends JPanel {
     }
 
     private static void getPathQueryResult(String[] fileNames) {
-        String command = "python3 url_parser.py --url="+orchestratorURL+getRoute[0]
-                +Integer.toString(taskID)+" --type "+getRouteType[0]
-                +" --output ./" + getRouteType[0]+"-result";
+        String[] command = {"python3", "url_parser.py" "--url="+orchestratorURL+getRoute[0]
+                +Integer.toString(taskID), "--type", getRouteType[0],
+                "--output", "./"+getRouteType[0]+"-result"};
         try {
             Process process = Runtime.getRuntime().exec(command);
             process.waitFor();
@@ -358,9 +365,9 @@ public class UnicornGUI extends JPanel {
     }
 
     private static void getResourceQueryResult(String[] fileNames) {
-        String command = "python3 url_parser.py --url="+orchestratorURL+getRoute[1]
-                +Integer.toString(taskID)+" --type "+getRouteType[1]
-                +" --output ./" + getRouteType[1]+"-result";
+        String[] command = {"python3", "url_parser.py" "--url="+orchestratorURL+getRoute[1]
+                +Integer.toString(taskID), "--type", getRouteType[1],
+                "--output", "./"+getRouteType[1]+"-result"};
         try {
             Process process = Runtime.getRuntime().exec(command);
             process.waitFor();
@@ -379,9 +386,9 @@ public class UnicornGUI extends JPanel {
     }
 
     private static void getSchedulingResult(String[] fileNames) {
-        String command = "python3 url_parser.py --url="+orchestratorURL+getRoute[3]
-                +Integer.toString(taskID)+" --type "+getRouteType[3]
-                +" --output ./" + getRouteType[3]+"-result";
+        String[] command = {"python3", "url_parser.py" "--url="+orchestratorURL+getRoute[3]
+                +Integer.toString(taskID), "--type", getRouteType[3],
+                "--output", "./"+getRouteType[3]+"-result"};
         try {
             Process process = Runtime.getRuntime().exec(command);
             process.waitFor();
@@ -397,7 +404,7 @@ public class UnicornGUI extends JPanel {
 
     private static void startLinkBWProgam() {
         //Thread t = new Thread(() -> {
-         //   System.out.println()
+            System.out.println(linkBWProgCommand);
             try {
                 Process p = Runtime.getRuntime().exec(linkBWProgCommand);
                 //p.waitFor();

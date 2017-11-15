@@ -22,6 +22,7 @@ if __name__ == "__main__":
     data=json.load(open(args.input, 'r'))
     f = open(args.output, 'w')
 
+    print data['complete']
     if data['complete']==True:
         f.write("1\n")
     else:

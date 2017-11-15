@@ -25,7 +25,7 @@ if __name__ == "__main__":
         dstNum=len(data['jobs'][i]['potential_dsts'])
         f.write("\t Job "+str(i+1)+" has "+str(srcNum)+" potential input data sources and "+str(dstNum)+" potential computation nodes.\n")
         totalJob+=srcNum*dstNum
-    f.write("Overvall there are "+str(totalJob)+" candidate jobs.\n")
+    f.write("Overvall there are "+str(totalJob)+" candidate jobs.\n \n")
     f.close
 
 

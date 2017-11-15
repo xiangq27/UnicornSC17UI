@@ -1,5 +1,5 @@
 link bandwidth app
-java BandwidthUI -config config-bui 
+java -cp src BandwidthUI -config src/config-bui 
 orchestrator url
 http://131.215.207.184:6666
 task config

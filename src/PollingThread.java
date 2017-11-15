@@ -35,7 +35,7 @@ public class PollingThread extends Thread {
                          String display) {
         this.taskID = taskID;
          this.pollURL = pollURL;
-        this.pollFile = pollFile;
+        this.pollFile = pollFile+"-"+Integer.toString(taskID);
         //this.type = type;
         this.getURL = getURL;
         this.getDir = getDir;
@@ -44,14 +44,17 @@ public class PollingThread extends Thread {
 
     @Override
     public void run() {
-        String command = "./getStatus.sh "+this.pollURL+" "+
-                Integer.toString(this.taskID)+" "+this.pollFile;
+        String[] command = new String[]{"./getStatus.sh", this.pollURL,
+                Integer.toString(this.taskID), this.pollFile};
         //String[] command = new String[]{"bash", "url_parser.py", "--url", this.getURL + Integer.toString(this.taskID), "--type", this.type, "--output", this.pollFile};
+        //System.out.println(command);
         while (true) { // repeat until gets killed
             try {
                 Process process = Runtime.getRuntime().exec(command);
                 process.waitFor();
 
+
+                System.out.println(this.pollFile+"is done");
                 FileReader f = new FileReader(pollFile);
                 BufferedReader br = new BufferedReader(f);
                 String currentLine;

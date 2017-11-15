@@ -1,10 +1,12 @@
 #!/bin/bash
 
-fileNamePart="-monitor"
-jsonName=".json"
-curl $1$2 > $1$fileNamePart$2$jsonName
+fileNamePart=".json"
+#echo $1$2
+curl $1$2 > $3".json"
 
-python parseStatusJson.py -input $1$fileNamePart$2$jsonName -output $3
+#cat $1$fileNamePart$2$jsonName
+
+python parseStatusJson.py -input $3".json" -output $3
 
 
 
