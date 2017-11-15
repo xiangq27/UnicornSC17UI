@@ -1,6 +1,6 @@
 { "id": 1,
   "jobs": [
-    { "potential_srcs": [ { "ip": "10.10.15.24", "port": 1234} ], "potential_dsts": [ { "ip": "10.10.15.17", "port": 9876}, { "ip": "10.10.15.19", "port": 5678} ], "protocol": "tcp", "file-size": 100000 },
+    { "potential_srcs": [ { "ip": "10.10.15.24", "port": 1234} ], "potential_dsts": [ { "ip": "10.10.15.17", "port": 9876}, { "ip": "10.10.15.19", "port": 5678} ], "protocol": "tcp", "file-size": 250000 },
     { "potential_srcs": [ { "ip": "10.10.15.18", "port": 1235} ], "potential_dsts": [ { "ip": "10.10.15.17", "port": 4445}, { "ip": "10.10.15.19", "port": 4445} ], "protocol": "tcp", "file-size": 100000 }
   ]
 }

@@ -1,3 +1,4 @@
-255 0 0 link1 ./python-utils/input
-0 0 0 link2 ./python-utils/input1
-0 0 255 link3 ./python-utils/input2
+255 0 0 link1 ./input-1
+0 0 0 link2 ./input-2
+0 0 255 link3 ./input-3
+0 255 0 link4 ./input-4
