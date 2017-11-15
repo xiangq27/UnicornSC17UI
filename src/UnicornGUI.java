@@ -24,7 +24,7 @@ public class UnicornGUI extends JPanel {
     private final static int TEXT_PANE_HEIGHT = 600;
     private final static int BUTTON_WIDTH = 150;
     private final static int BUTTON_HEIGHT = 50;
-    private final static Font TITLE_FONT = new Font("Calibri", Font.BOLD,30);
+    private final static Font TITLE_FONT = new Font("Calibri", Font.BOLD,32);
     private final static Font BUTTON_FONT = new Font("Calibri", Font.BOLD,20);
 
 
@@ -256,7 +256,6 @@ public class UnicornGUI extends JPanel {
 
     private static void submitTask() {
         if (!SUBMITTED) {
-            //TODO: submit the task to the orchestrator
 
             flushMonitorFiles();
 
@@ -269,15 +268,27 @@ public class UnicornGUI extends JPanel {
               //  display(task + "\n", "regular");
                 SUBMITTED = true;
                 //sc.close();
-				String command = "./submit.sh";
-        
-            Process process = Runtime.getRuntime().exec(command);
-            process.waitFor();
+				//String command = "./submit.sh";
 
-            String content = new Scanner(new File("./submit.sh"))
-                                .useDelimiter("\\Z").next();
-            doc.insertString(doc.getLength(), content, doc.getStyle("regular"));
-        
+                String jsonContent = new Scanner(new File(taskInput)).useDelimiter("\\Z").next();
+
+                String command = "curl -v "+orchestratorURL+"/task " +
+                        "-H 'Content-type: application/json' -d '[" + jsonContent + "]'";
+
+
+                //Process process = Runtime.getRuntime().exec(command);
+                //process.waitFor();
+
+
+                System.out.println(taskInput);
+                String parseTaskCom = "python parseTaskJson.py -input "+taskInput+" -output ./task";
+                Process parseTaskpro = Runtime.getRuntime().exec(parseTaskCom);
+                parseTaskpro.waitFor();
+
+                String content = new Scanner(new File("./task"))
+                                    .useDelimiter("\\Z").next();
+                doc.insertString(doc.getLength(), content, doc.getStyle("regular"));
+
 
 
                 //start polling threads
@@ -408,7 +419,7 @@ public class UnicornGUI extends JPanel {
 
     private static void createAndShowGUI() {
         //Create and set up the window.
-        frame = new JFrame("TextSamplerDemo");
+        frame = new JFrame("Unicorn Graphic User Interface");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
@@ -432,6 +443,7 @@ public class UnicornGUI extends JPanel {
                 getStyle(StyleContext.DEFAULT_STYLE);
 
         Style regular = doc.addStyle("regular", def);
+        StyleConstants.setFontSize(regular, 16);
         StyleConstants.setFontFamily(def, "SansSerif");
 
         Style s = doc.addStyle("italic", regular);
@@ -444,7 +456,7 @@ public class UnicornGUI extends JPanel {
         StyleConstants.setFontSize(s, 10);
 
         Style large = doc.addStyle("large", regular);
-        StyleConstants.setFontSize(large, 16);
+        StyleConstants.setFontSize(large, 20);
 
         s = doc.addStyle("largeBold", large);
         StyleConstants.setBold(s, true);
