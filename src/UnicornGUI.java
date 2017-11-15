@@ -44,6 +44,7 @@ public class UnicornGUI extends JPanel {
                                             "/resource_lookup/",
                                             "/task_lookup/",
                                             "/schedule_lookup/"};
+    private final static String[] type = {"task", "resource", "task", "scheduling"};
     private final static String[] displayHead = {"Path query",
                                                 "Resource query",
                                                 "SMPC",
@@ -273,7 +274,7 @@ public class UnicornGUI extends JPanel {
                 for (int i = 0; i < NUM_OF_MONITOR; i++) {
                     //String pollURL = orchestratorURL+pollingRoute[i]+Integer.toString(taskID);
                     PollingThread pollingThread = new PollingThread(taskID,
-                            orchestratorURL+pollingRoute[i], monitorFiles[i],
+                            type[i], monitorFiles[i],
                             orchestratorURL+getRoute[i], resultDirs[i],
                             displayHead[i]);
                             //computeDisp[i]);
