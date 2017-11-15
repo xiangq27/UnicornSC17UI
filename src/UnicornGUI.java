@@ -263,13 +263,21 @@ public class UnicornGUI extends JPanel {
             String s = "The following task is submitted to Unicorn:\n";
             display(s, "largeBold");
             try {
-                File f = new File(taskInput);
-                Scanner sc = new Scanner(f);
-                String task = sc.useDelimiter("\\Z").next();
-                display(task + "\n", "regular");
+        //        File f = new File(taskInput);
+          //      Scanner sc = new Scanner(f);
+            //    String task = sc.useDelimiter("\\Z").next();
+              //  display(task + "\n", "regular");
                 SUBMITTED = true;
-                sc.close();
+                //sc.close();
+				String command = "./submit.sh";
+        
+            Process process = Runtime.getRuntime().exec(command);
+            process.waitFor();
 
+            String content = new Scanner(new File("./submit.sh"))
+                                .useDelimiter("\\Z").next();
+            doc.insertString(doc.getLength(), content, doc.getStyle("regular"));
+        
 
 
                 //start polling threads
