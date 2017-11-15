@@ -38,7 +38,7 @@ def get_flow_description(flow, bandwidth=None):
             flow["flow-id"], flow["src-ip"], flow["dst-ip"],
             flow["path"].__str__())
     else:
-        avail_bw = flow["avail-bw"] / (1024 * 1024 * 1024)
+        avail_bw = flow["avail-bw"] / (1000 * 1000)
         description = "The Flow-%d is from %s to %s. It is scheduled to %d Gbps.\n" % (
             flow["flow-id"], flow["src-ip"], flow["dst-ip"], round(avail_bw))
     return description
@@ -54,7 +54,7 @@ def parse_task(input, output):
             % (job["job-id"], len(job["flows"]), get_flows_name(job["flows"])))
         for flow in job["flows"].values():
             output.write(get_flow_description(flow))
-
+    output.write("\n")
 
 def get_constraint(vector, limit):
     items = list()
@@ -69,7 +69,7 @@ def get_constraint(vector, limit):
         flow_name = "Flow-" + item["flow-id"]
         items.append(coefficient + " " + flow_name)
     return " + ".join(items) + " <= " + str(
-        round(limit["availbw"] / (1024 * 1024 * 1024))) + " Gbps"
+        ceil(limit["availbw"] / (1000 * 1000 ))) + " Gbps"
 
 
 def get_constraints(ane_matrix, anes):
@@ -77,7 +77,8 @@ def get_constraints(ane_matrix, anes):
     for vector, limit in zip(ane_matrix, anes):
         constraint = get_constraint(vector, limit)
         description += ("    " + constraint + "\n")
-    return description
+    description
+    return description += ("\n\n")
 
 
 def parse_resource(input, output):

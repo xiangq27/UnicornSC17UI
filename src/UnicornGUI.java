@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.rmi.server.ExportException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import javax.swing.*;
@@ -37,13 +38,13 @@ public class UnicornGUI extends JPanel {
     private final static String[] pollingRoute = {"/path_complete_lookup/",
                                                 "/resource_complete_lookup/",
                                                 "/resource_complete_lookup/",
-                                                "/schedule_complete_lookup/"};
+                                                "/scheduling_complete_lookup/"};
     //TODO: SMPC does not need a route right now, only use as a place holder
     //TODO: schedule is not defined yet
     private final static String[] getRoute = {"/task_lookup/",
                                             "/resource_lookup/",
                                             "/resource_lookup/",
-                                            "/schedule_lookup/"};
+                                            "/scheduling_result_lookup/"};
     private final static String[] getRouteType = {"task", "resource", "smpc", "scheduling"};
 
     //private final static String[] type = {"task", "resource", "task", "scheduling"};
@@ -294,6 +295,9 @@ public class UnicornGUI extends JPanel {
                 //start polling threads
                 for (int i = 0; i < NUM_OF_MONITOR; i++) {
                     //String pollURL = orchestratorURL+pollingRoute[i]+Integer.toString(taskID);
+                    if (i ==2)
+                        continue;
+
                     PollingThread pollingThread = new PollingThread(taskID,
                             orchestratorURL+pollingRoute[i], monitorFiles[i],
                             //type[i], monitorFiles[i],
@@ -305,7 +309,7 @@ public class UnicornGUI extends JPanel {
                 }
 
 
-                Process p = Runtime.getRuntime().exec("./getBW.sh");
+
                 //p.waitFor();
 
 
@@ -348,9 +352,10 @@ public class UnicornGUI extends JPanel {
     }
 
     private static void getPathQueryResult(String[] fileNames) {
-        String[] command = {"python3", "url_parser.py" "--url="+orchestratorURL+getRoute[0]
+        String[] command = {"python2", "url_parser.py", "--url="+orchestratorURL+getRoute[0]
                 +Integer.toString(taskID), "--type", getRouteType[0],
                 "--output", "./"+getRouteType[0]+"-result"};
+        //System.out.println(Arrays.toString(command));
         try {
             Process process = Runtime.getRuntime().exec(command);
             process.waitFor();
@@ -365,7 +370,7 @@ public class UnicornGUI extends JPanel {
     }
 
     private static void getResourceQueryResult(String[] fileNames) {
-        String[] command = {"python3", "url_parser.py" "--url="+orchestratorURL+getRoute[1]
+        String[] command = {"python2", "url_parser.py", "--url="+orchestratorURL+getRoute[1]
                 +Integer.toString(taskID), "--type", getRouteType[1],
                 "--output", "./"+getRouteType[1]+"-result"};
         try {
@@ -386,7 +391,7 @@ public class UnicornGUI extends JPanel {
     }
 
     private static void getSchedulingResult(String[] fileNames) {
-        String[] command = {"python3", "url_parser.py" "--url="+orchestratorURL+getRoute[3]
+        String[] command = {"python2", "url_parser.py", "--url="+orchestratorURL+getRoute[3]
                 +Integer.toString(taskID), "--type", getRouteType[3],
                 "--output", "./"+getRouteType[3]+"-result"};
         try {
@@ -510,6 +515,8 @@ public class UnicornGUI extends JPanel {
             BufferedReader br = new BufferedReader(f);
 
             String currentLine;
+
+            Process p = Runtime.getRuntime().exec("./getBW.sh");
 
             while ((currentLine = br.readLine()) != null) {
                 System.out.println(currentLine);

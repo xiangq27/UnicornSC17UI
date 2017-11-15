@@ -54,7 +54,7 @@ public class PollingThread extends Thread {
                 process.waitFor();
 
 
-                System.out.println(this.pollFile+"is done");
+                //System.out.println(this.pollFile+"is done");
                 FileReader f = new FileReader(pollFile);
                 BufferedReader br = new BufferedReader(f);
                 String currentLine;
@@ -87,7 +87,7 @@ public class PollingThread extends Thread {
                 }
             }
             catch (FileNotFoundException f) {
-                f.printStackTrace();
+                //f.printStackTrace();
                 continue;
             }
             catch (InterruptedException g) {
