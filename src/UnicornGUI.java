@@ -394,6 +394,9 @@ public class UnicornGUI extends JPanel {
         String[] command = {"python2", "url_parser.py", "--url="+orchestratorURL+getRoute[3]
                 +Integer.toString(taskID), "--type", getRouteType[3],
                 "--output", "./"+getRouteType[3]+"-result"};
+
+        System.out.println(Arrays.toString(command));
+        
         try {
             Process process = Runtime.getRuntime().exec(command);
             process.waitFor();

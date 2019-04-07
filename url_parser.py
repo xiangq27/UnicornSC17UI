@@ -69,7 +69,7 @@ def get_constraint(vector, limit):
         flow_name = "Flow-" + item["flow-id"]
         items.append(coefficient + " " + flow_name)
     return " + ".join(items) + " <= " + str(
-        ceil(limit["availbw"] / (1000 * 1000 ))) + " Gbps"
+        round(limit["availbw"] / (1000 * 1000 ))) + " Gbps"
 
 
 def get_constraints(ane_matrix, anes):
@@ -77,8 +77,8 @@ def get_constraints(ane_matrix, anes):
     for vector, limit in zip(ane_matrix, anes):
         constraint = get_constraint(vector, limit)
         description += ("    " + constraint + "\n")
-    description
-    return description += ("\n\n")
+    #description += ("\n\n")
+    return description 
 
 
 def parse_resource(input, output):

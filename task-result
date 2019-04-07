@@ -1,0 +1,8 @@
+The task 1 has 2 job(s): [u'Job-1', u'Job-2'].
+For Job-1, it has 2 flow(s): ['Flow-1', 'Flow-2'], and all of them complete their path queries.
+The Flow-1 is from 10.10.15.26 to 10.10.15.17. It has completed its path query and get its path: [].
+The Flow-2 is from 10.10.15.26 to 10.10.15.19. It has completed its path query and get its path: [].
+For Job-2, it has 2 flow(s): ['Flow-3', 'Flow-4'], and all of them complete their path queries.
+The Flow-3 is from 10.10.15.18 to 10.10.15.17. It has completed its path query and get its path: [].
+The Flow-4 is from 10.10.15.18 to 10.10.15.19. It has completed its path query and get its path: [].
+

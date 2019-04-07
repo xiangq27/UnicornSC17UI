@@ -1,0 +1,5 @@
+The task has 2 job(s): [u'Job-1', u'Job-2']
+For Job-1, it has 1 flows: ['Flow-1']
+The Flow-1 is from 10.10.15.26 to 10.10.15.17. It is scheduled to 100 Gbps.
+For Job-2, it has 1 flows: ['Flow-4']
+The Flow-4 is from 10.10.15.18 to 10.10.15.19. It is scheduled to 40 Gbps.

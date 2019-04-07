@@ -1,0 +1,4 @@
+Caltech-Campus returns such constraints:
+     Flow-4 +  Flow-2 <= 40.0 Gbps
+     Flow-4 +  Flow-3 <= 100.0 Gbps
+     Flow-1 +  Flow-2 +  Flow-3 <= 100.0 Gbps
